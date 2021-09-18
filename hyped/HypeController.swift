@@ -2,8 +2,8 @@ import Hype
 import Foundation
 
 // Probably some .env equivalent for IOS like in Info.plist... god...
-let hypeAppID: String = ""
-let hypeAccessToken: String = "" // please dont push me...
+let hypeAppID: String = "969f6cb2"
+let hypeAccessToken: String = "373e0d803985df37" // please dont push me...
 
 typealias HypeListener = (String) -> Void
 

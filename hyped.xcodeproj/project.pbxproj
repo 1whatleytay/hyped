@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A13CC52626F6703100DB4FEE /* NearMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13CC52526F6703100DB4FEE /* NearMeView.swift */; };
+		A13CC52826F6703800DB4FEE /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13CC52726F6703800DB4FEE /* ProfileView.swift */; };
+		A13CC52A26F6704200DB4FEE /* LocalLeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13CC52926F6704200DB4FEE /* LocalLeaderboardView.swift */; };
 		B83B936926F63F9C00AECE7E /* HypeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83B936826F63F9C00AECE7E /* HypeController.swift */; };
 		B89A262126F62685006005D0 /* HypedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89A262026F62685006005D0 /* HypedApp.swift */; };
 		B89A262326F62685006005D0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89A262226F62685006005D0 /* ContentView.swift */; };
@@ -31,6 +34,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A13CC52526F6703100DB4FEE /* NearMeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearMeView.swift; sourceTree = "<group>"; };
+		A13CC52726F6703800DB4FEE /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		A13CC52926F6704200DB4FEE /* LocalLeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalLeaderboardView.swift; sourceTree = "<group>"; };
 		B83B935F26F631A300AECE7E /* Hype.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Hype.framework; sourceTree = "<group>"; };
 		B83B936226F6326200AECE7E /* HypeIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HypeIOS.framework; sourceTree = "<group>"; };
 		B83B936326F6326200AECE7E /* HypeSimulator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HypeSimulator.framework; sourceTree = "<group>"; };
@@ -56,6 +62,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A13CC52B26F672E800DB4FEE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		B89A261426F62685006005D0 = {
 			isa = PBXGroup;
 			children = (
@@ -76,8 +89,12 @@
 		B89A261F26F62685006005D0 /* hyped */ = {
 			isa = PBXGroup;
 			children = (
+				A13CC52B26F672E800DB4FEE /* Model */,
 				B89A262026F62685006005D0 /* HypedApp.swift */,
 				B89A262226F62685006005D0 /* ContentView.swift */,
+				A13CC52526F6703100DB4FEE /* NearMeView.swift */,
+				A13CC52726F6703800DB4FEE /* ProfileView.swift */,
+				A13CC52926F6704200DB4FEE /* LocalLeaderboardView.swift */,
 				B83B936826F63F9C00AECE7E /* HypeController.swift */,
 				B89A262426F62688006005D0 /* Assets.xcassets */,
 				B89A262926F62688006005D0 /* Info.plist */,
@@ -175,8 +192,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A13CC52A26F6704200DB4FEE /* LocalLeaderboardView.swift in Sources */,
 				B89A262326F62685006005D0 /* ContentView.swift in Sources */,
 				B89A262126F62685006005D0 /* HypedApp.swift in Sources */,
+				A13CC52826F6703800DB4FEE /* ProfileView.swift in Sources */,
+				A13CC52626F6703100DB4FEE /* NearMeView.swift in Sources */,
 				B83B936926F63F9C00AECE7E /* HypeController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -307,7 +327,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"hyped/Preview Content\"";
-				DEVELOPMENT_TEAM = 29ZQB5VV8B;
+				DEVELOPMENT_TEAM = R6YPC9XF96;
 				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
@@ -323,7 +343,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = desgroup.hyped;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yashmulki.hyped;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -337,7 +357,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"hyped/Preview Content\"";
-				DEVELOPMENT_TEAM = 29ZQB5VV8B;
+				DEVELOPMENT_TEAM = R6YPC9XF96;
 				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
@@ -351,7 +371,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = desgroup.hyped;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yashmulki.hyped;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -11,8 +11,7 @@ struct ContentView: View {
     
     let hypeController: HypeController?
     
-    @State
-    var messages = "[Log Start]"
+    @State var messages = "[Log Start]"
     
     // I don't know SwiftUI formatting...
     var body: some View {
@@ -22,7 +21,7 @@ struct ContentView: View {
                     .padding(.leading, 10)
                     
                 VStack() {
-                    Text(verbatim: messages)
+                    Text(messages)
                 }
                 .frame(
                     minWidth: 0,
@@ -40,26 +39,22 @@ struct ContentView: View {
             }) {
                 Text("Send")
             }.padding()
-        }
+        }.onAppear(perform: {
+            attachHype(messages: $messages)
+        })
     }
     
     // Okay... I've convinced Swift I'm not capturing "mutating self".
-    func attachHype() {
+    func attachHype(messages: Binding<String>) {
         hypeController?.listeners.append({
             message in
-            
             print("Hype received message \(message).")
-            
-//            DispatchQueue.main.async {
-            self.messages = message
-//            }
+            messages.wrappedValue = message
         })
     }
     
     init(hypeController: HypeController?) {
         self.hypeController = hypeController
-        
-        attachHype()
     }
 }
 
