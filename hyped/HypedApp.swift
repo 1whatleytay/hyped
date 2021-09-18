@@ -7,7 +7,8 @@ struct HypedApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(hypeController: hypeController)
+//            ContentView(hypeController: hypeController)
+            MainView()
         }
     }
     
