@@ -20,7 +20,7 @@ struct MainView: View {
         TabView(selection: $view) {
             ProfileView(user: interface?.user ?? defaultPerson)
                 .tabItem { Label("Me", systemImage: "person.circle.fill") }.tag(0)
-            NearMeView(nearMePeople: $people)
+            NearMeView(nearMePeople: $people, interface: interface)
                 .tabItem { Label("Near Me", systemImage: "dot.radiowaves.left.and.right") }.tag(1)
             LocalLeaderboardView()
                 .tabItem { Label("Rankings", systemImage: "list.star") }.tag(2)

@@ -44,25 +44,51 @@ struct ProfileView: View {
 }
 
 struct RateCell: View {
+    @State var person: Person
     
-    let person: Person
+    var interface: Interface?
+    
+    @State var rating = 0
+    
+    let image = Image(systemName: "star.fill")
     
     var body: some View {
-        NavigationLink(destination: ProfileView(user: person), label: {
-            HStack(spacing: 10) {
-                Image("god")
-                    .resizable()
-                    .aspectRatio(contentMode: ContentMode.fit)
-                    .frame(width: 50, height: 50)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.red, lineWidth: 5))
-                VStack(alignment: .leading, spacing: 5) {
-                    Text("Rated " + person.name)
-                    Text("rating goes here")
+        ProfileView(user: person)
+        
+        VStack(alignment: .leading, spacing: 5) {
+            Text("Rated " + person.name)
+            
+            HStack {
+                ForEach(1 ..< 6) {
+                    number in
+                    
+                    image
+                        .foregroundColor(number <= self.rating ? .yellow : .gray)
+                        .onTapGesture {
+                            self.rating = number
+                            
+                            // i doubt this will work but its worth a shot
+                            self.interface?.rate(userId: person.id, score: number, callback: {
+                                person in self.person = person
+                            })
+                        }
                 }
-                Spacer()
-            }.padding(EdgeInsets.init(top: 5, leading: 10, bottom: 5, trailing: 5))
-        })
+            }
+            .padding()
+        }
+        
+        // I DONT UNDERSTAND WHAT THIS IS FOR...
+        
+//            HStack(spacing: 10) {
+//                Image("god")
+//                    .resizable()
+//                    .aspectRatio(contentMode: ContentMode.fit)
+//                    .frame(width: 50, height: 50)
+//                    .clipShape(Circle())
+//                    .overlay(Circle().stroke(Color.red, lineWidth: 5))
+//                Spacer()
+//            }.padding(EdgeInsets.init(top: 5, leading: 10, bottom: 5, trailing: 5))
+//        })
     }
 }
 

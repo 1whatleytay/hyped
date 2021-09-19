@@ -8,17 +8,19 @@
 import SwiftUI
 
 struct NearMeView: View {
-    @State var nearMePeople: Binding<[InterfacePair]>
+    @Binding var nearMePeople: [InterfacePair]
+    
+    let interface: Interface?
     
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack {
-                    ForEach(nearMePeople.wrappedValue, id: \.self) { pair in
+                    ForEach(nearMePeople, id: \.self) { pair in
                         NavigationLink(
                             destination: ProfileView(user: pair.person),
                             label: {
-                                NearMePersonCell(person: pair.person)
+                                NearMePersonCell(person: pair.person, interface: interface)
                                     .padding(.init(top: 7, leading: 5, bottom: 7, trailing: 5))
                                     .background(
                                         Color(.sRGB, red: 0.1, green: 0.1, blue: 0.1, opacity: 1.0))
@@ -35,10 +37,12 @@ struct NearMeView: View {
 struct NearMePersonCell: View {
     let person: Person
     
+    let interface: Interface?
+    
     var body: some View {
-        NavigationLink(destination: ProfileView(user: person), label: {
+        NavigationLink(destination: RateCell(person: person, interface: interface), label: {
             HStack(spacing: 10) {
-                Image("god")
+                Image("profile")
                     .resizable()
                     .aspectRatio(contentMode: ContentMode.fit)
                     .frame(width: 50, height: 50)
@@ -59,6 +63,6 @@ struct NearMeView_Previews: PreviewProvider {
         NearMeView(nearMePeople: .constant([
             .init(instance: nil, person: Person(id: 4, name: "Vineeth Monke", score: 5, picture: nil)),
             .init(instance: nil, person: Person(id: 5, name: "Nagabhusahn", score: 0, picture: nil))
-        ]))
+        ]), interface: nil)
     }
 }

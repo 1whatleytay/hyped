@@ -233,13 +233,13 @@ class Interface : NSObject, HYPStateObserver, HYPMessageObserver, HYPNetworkObse
             return false
         }
         
-        Person.get(userId: userId, callback: {
-            person in
+//        Person.get(userId: userId, callback: {
+//            person in
+//
+//            callback(Interface(user: person))
+//        })
 
-            callback(Interface(user: person))
-        })
-
-        return true
+        return false
     }
     
     init(user: Person) {
