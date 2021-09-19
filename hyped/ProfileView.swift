@@ -7,16 +7,9 @@
 
 import SwiftUI
 
-
-struct ProfileData: Codable, Hashable {
-    let imgLink: URL?
-    let name: String
-    let score: Float32
-}
-
 struct ProfileView: View {
     
-    let user: ProfileData
+    let user: Person
     
     var body: some View {
         NavigationView {
@@ -52,7 +45,7 @@ struct ProfileView: View {
 
 struct RateCell: View {
     
-    let person: ProfileData
+    let person: Person
     
     var body: some View {
         NavigationLink(destination: ProfileView(user: person), label: {
@@ -64,7 +57,7 @@ struct RateCell: View {
                     .clipShape(Circle())
                     .overlay(Circle().stroke(Color.red, lineWidth: 5))
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("Rated " person.name)
+                    Text("Rated " + person.name)
                     Text("rating goes here")
                 }
                 Spacer()
@@ -75,6 +68,6 @@ struct RateCell: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(user: ProfileData(imgLink: nil, name: "Yash T", score: 6.0))
+        ProfileView(user: Person(id: 1, name: "Yash T", score: 2))
     }
 }

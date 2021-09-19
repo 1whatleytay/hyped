@@ -1,4 +1,4 @@
-import SwiftUI
+/*import SwiftUI
 
 // can't find colors i like in Colors.* sooo... tailwift-ui
 let gray100 = Color(red: 0.95, green: 0.96, blue: 0.96)
@@ -9,7 +9,7 @@ struct ContentView: View {
     @Environment(\.colorScheme) var colorScheme
     var dark: Bool { colorScheme == .dark }
     
-    let hypeController: HypeController?
+//    let hypeController: HypeController?
     
     @State var messages = "[Log Start]"
     
@@ -63,3 +63,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView(hypeController: nil)
     }
 }
+*/

@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct NearMeView: View {
-    
-    @State var nearMePeople: [ProfileData] = []
+    @State var nearMePeople: [Person] = []
     
     var body: some View {
         NavigationView {
@@ -19,20 +18,28 @@ struct NearMeView: View {
                         NavigationLink(
                             destination: ProfileView(user: person),
                             label: {
-                                NearMePersonCell(person: person).padding(EdgeInsets.init(top: 7, leading: 5, bottom: 7, trailing: 5)).background(Color(.sRGB, red: 25/255, green: 25/255, blue: 25/255, opacity: 1.0)).cornerRadius(15)                            })
+                                NearMePersonCell(person: person)
+                                    .padding(.init(top: 7, leading: 5, bottom: 7, trailing: 5))
+                                    .background(
+                                        Color(.sRGB, red: 0.1, green: 0.1, blue: 0.1, opacity: 1.0))
+                                    .cornerRadius(15)
+                            }
+                        )
                     }
                 }
             }.navigationBarTitle(Text("Near Me"))
         }.onAppear(perform: {
             // Fetch people and put it into near me people
-            nearMePeople = [ProfileData(imgLink: nil, name: "Vineeth Monke", score: 0.0), ProfileData(imgLink: nil, name: "Nagabhusahn", score: 99.0)]
+            nearMePeople = [
+                Person(id: 4, name: "Vineeth Monke", score: 5, picture: nil),
+                Person(id: 5, name: "Nagabhusahn", score: 0, picture: nil)
+            ]
         })
     }
 }
 
 struct NearMePersonCell: View {
-    
-    let person: ProfileData
+    let person: Person
     
     var body: some View {
         NavigationLink(destination: ProfileView(user: person), label: {
