@@ -1,9 +1,16 @@
 import Hype
+import SwiftUI
 import Foundation
+
+// Probably some .env equivalent for IOS like in Info.plist... god...
+let hypeAppID: String = "969f6cb2"
+let hypeAccessToken: String = "373e0d803985df37" // please dont push me...
+
+typealias HypeListener = (String) -> Void
 
 let userKey = "auth:user-id"
 
-let baseURL = "https://google.com"
+let baseURL = "http://35.222.83.199:8080"
 
 struct RegisterInput : Codable {
     var name: String
@@ -55,14 +62,19 @@ struct Person : Codable, Hashable {
             }
             
             callback(person)
-        }
+        }.resume()
     }
+}
+
+struct InterfacePair : Hashable {
+    let instance: HYPInstance?
+    let person: Person
 }
 
 class Interface : NSObject, HYPStateObserver, HYPMessageObserver, HYPNetworkObserver {
     let user: Person
     
-    public var nearby = [(instance: HYPInstance, person: Person)]()
+    public var nearby: Binding<[InterfacePair]>?
     
     // do whatever you want... im not one to stop you
     public var listeners = [HypeListener]() // my thing
@@ -109,7 +121,7 @@ class Interface : NSObject, HYPStateObserver, HYPMessageObserver, HYPNetworkObse
         print("Received UID from nearby connection \(fromInstance.stringIdentifier ?? "nil").")
         
         Person.get(userId: id, callback: {
-            person in self.nearby.append((instance: fromInstance, person: person))
+            person in self.nearby?.wrappedValue.append(InterfacePair(instance: fromInstance, person: person))
         })
     }
     
@@ -126,7 +138,7 @@ class Interface : NSObject, HYPStateObserver, HYPMessageObserver, HYPNetworkObse
               + " with error \(error.description ?? "nil").")
         
         // Set doesn't *seem* to support hashing by reference in Swift... really sad...
-        nearby.removeAll(where: { $0.instance === instance })
+        nearby?.wrappedValue.removeAll(where: { $0.instance === instance })
     }
     
     func hypeDidResolve(_ instance: HYPInstance!) {
@@ -137,13 +149,13 @@ class Interface : NSObject, HYPStateObserver, HYPMessageObserver, HYPNetworkObse
         HYP.send(String(user.id).data(using: .utf8), to: instance)
     }
     
-    func use() {
+    func begin(binding: Binding<[InterfacePair]>) {
+        self.nearby = binding
+        
         HYP.add(self as HYPStateObserver)
         HYP.add(self as HYPMessageObserver)
         HYP.add(self as HYPNetworkObserver)
-    }
-    
-    static func start() {
+        
         HYP.setAppIdentifier(hypeAppID)
         
         HYP.start()
@@ -176,7 +188,7 @@ class Interface : NSObject, HYPStateObserver, HYPMessageObserver, HYPNetworkObse
             }
             
             callback(person)
-        }
+        }.resume()
     }
     
     static func register(name: String, picture: String, callback: @escaping (Interface) -> Void) {
@@ -188,15 +200,11 @@ class Interface : NSObject, HYPStateObserver, HYPMessageObserver, HYPNetworkObse
         guard let data = try? encoder.encode(registerInput) else { return }
         
         var request = URLRequest(url: url)
-//        request.httpMethod = "POST"
-//        request.httpBody = data
-        
-        print("what the fuck")
+        request.httpMethod = "POST"
+        request.httpBody = data
         
         URLSession.shared.dataTask(with: request) {
             (data, response, error) in
-            
-            print("End me...")
             
             guard let data = data else {
                 print("Interface.regsiter request error \(error?.localizedDescription ?? "nil").")
@@ -213,7 +221,7 @@ class Interface : NSObject, HYPStateObserver, HYPMessageObserver, HYPNetworkObse
             
             // GO BACK!!!!
             callback(Interface(user: person))
-        }
+        }.resume()
     }
     
     static func login(callback: @escaping (Interface) -> Void) -> Bool {
@@ -227,10 +235,10 @@ class Interface : NSObject, HYPStateObserver, HYPMessageObserver, HYPNetworkObse
         
         Person.get(userId: userId, callback: {
             person in
-            
+
             callback(Interface(user: person))
         })
-        
+
         return true
     }
     

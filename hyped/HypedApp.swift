@@ -10,13 +10,7 @@ struct HypedApp: App {
     
     func launch(binding: Binding<Interface?>) {
         let finish : (Interface) -> Void = {
-            interface in
-            
-            print("WHY NOT")
-            binding.wrappedValue = interface
-            
-            interface.use()
-            Interface.start()
+            interface in binding.wrappedValue = interface
         }
         
         if !Interface.login(callback: finish) {
@@ -27,8 +21,8 @@ struct HypedApp: App {
     var body: some Scene {
         WindowGroup {
             VStack {
-                if interface != nil {
-                    MainView()
+                if let interface = interface {
+                    MainView(interface: interface)
                 } else {
                     Text("Loading Interface...")
                 }
